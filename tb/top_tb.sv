@@ -15,15 +15,27 @@ module top_tb;
 
 /** declare tb signals below */
 logic clk_tb;
+logic button_tb1;
+logic button_tb2;
+logic led_tb1;
+logic led_tb2;
+logic dip_tb;
+logic[7:0] seg7_tb;
 
 /** declare module(s) below */
 top dut                    // declare an inst of top called "dut" (device under test)
 (
     /** hook up tb signals to dut signals */
-    .clk(clk_tb)           // connect dut's clk wire to clk_tb
+    .clk(clk_tb),           // connect dut's clk wire to clk_tb
+    .button1(button_tb1),
+    .button2(button_tb2),
+    .dip(dip_tb),
+    .led2(led_tb2),
+    .led1(led_tb1),
+    .seg7(seg7_tb)
 );
 
-localparam CLK_PERIOD = /** clk period */;
+localparam CLK_PERIOD = 10 /** clk period */;
 always #(CLK_PERIOD/2) clk_tb=~clk_tb;          // toggle clk_tb every #(CLK_PERIOD/2) ticks
 
 initial begin
@@ -34,7 +46,62 @@ end
 initial begin
     /** testbench logic goes below */
     clk_tb<=1'b1;       // sets clk_tb to 1
-    #(CLK_PERIOD*3);    // waits for CLK_PERIOD * 3 ticks
+    dip_tb <= 0;
+    #(CLK_PERIOD*12);    // waits for CLK_PERIOD * 12 ticks
+    button_tb1 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb1 <= 0;
+    #(CLK_PERIOD*12);
+    dip_tb <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    button_tb2 <= 0;
+    #(CLK_PERIOD*12);
+    button_tb2 <= 1;
+    
+
     $finish;            // end simulation, otherwise it runs indefinitely
 end
 
